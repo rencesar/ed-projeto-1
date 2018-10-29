@@ -1,32 +1,7 @@
-##############
-# CLASSE No:
-##############
-class No:
-    # INICIANDO O NO
-    def __init__(self, dado=None, proximo=None):
-        self._dado = dado
-        self._proximo = proximo
-    
-    # ACESSADORES
-    def get_dado(self):
-        return self._dado
-    def get_proximo(self):
-        return self._proximo
-    
-    # ALTERADORES
-    def set_dado(self, valor):
-        self._dado = valor
-    def set_proximo(self, valor):
-        self._proximo = valor
+from no import No
 
-    # PRINT
-    def __str__(self):
-        return "{}".format(self._dado)
-        
-##############
-# CLASSE LISTA ENCADEADA:
-##############
-class ListaEnc:
+
+class ListaEncadeada:
     # INICIANDO A LISTA
     def __init__(self, cabeca=None, cauda=None):
         self._cabeca = cabeca
@@ -103,6 +78,9 @@ class ListaEnc:
     def get_total(self):
         return self.total-1
 
+    def get_cauda(self):
+        return self._cauda
+
     def imprimir(self):
         aux = self._cabeca
         count = 1
@@ -110,67 +88,3 @@ class ListaEnc:
             print('    {}° - {}'.format(count, aux.get_dado()))
             aux = aux.get_proximo()
             count += 1
-
-##############
-# CLASSE PILHA:
-##############
-class Pilha:
-    # INICIANDO A PILHA
-    def __init__(self, topo=None):
-        self._topo = topo
-    # PILHA VAZIA
-    def vazia(self):
-        if self._topo == None:
-            return True
-        return False
-    # INSERINDO NA PILHA
-    def add(self, item):
-        aux = No(item)
-        if self._topo == None:
-            self._topo = aux
-            return True
-        else:
-            aux.set_proximo(self._topo)
-            self._topo = aux
-            return True
-        return False
-    # REMOVENDO O ELEMENTO DO TOP
-    def remover(self):
-        self._topo = self._topo.get_proximo()
-        return True
-    # RETORNANDO O TAMANHO DA PILHA
-    def tamanho(self):
-        count = 0
-        if self._topo == None:
-            return count
-        else:
-            aux = self._topo
-            while aux.get_proximo() != None:
-                aux = aux.get_proximo
-                count += 1
-            return count
-    # RETORNANDO O ELEMENTO DO TOP
-    def get_topo(self):
-        return self._topo
-
-##############
-# CLASSE FILA:
-##############
-class Fila:
-    # INICANDO A FILA
-    def __init__(self, itens=[]):
-        self._itens = itens
-    # FILA VAZIA
-    def vazia(self):
-        if self._itens == []:
-            return True
-        return False
-    # INSERINDO NA FILA
-    def add(self, item):
-        self._itens.insert(0, item)
-    # REMOVENDO DA FILA
-    def remover(self):
-        return self._itens.pop()
-    # RETORNANDO O TAMANHO DA FILA
-    def tamanho(self):
-        return len(self._itens)
