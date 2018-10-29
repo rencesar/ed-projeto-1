@@ -33,6 +33,7 @@ class ListaCompras:
     def remover_fim(self):
         return self.items.remover_fim()
 
+
 def add_item(lista, item):
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t#########################################')
@@ -42,7 +43,7 @@ def add_item(lista, item):
     print('\t#########################################\n')
 
     if lista.vazia():
-        if lista.add_inicio(item):
+        if lista.adicionar_inicio(item):
             print(f'\t>{item} adicionado com sucesso!')
         else:
             print(f'\t>{item} não adicionado.')
@@ -60,19 +61,19 @@ def add_item(lista, item):
         pos = int(input('\n   >>selecione a posição do item na lista: '))
         pos -= 1
         if pos == 0:
-            if lista.add_inicio(item):
+            if lista.adicionar_inicio(item):
                 print('\n\t>>>item adicionado com sucesso!')
             else:
                 print('\n\t>>>item não adicionado.')
             input('\n>precione enter para continuar...')
         elif pos > lista.get_total():
-            if lista.add_fim(item):
+            if lista.adicionar_fim(item):
                 print('\n\t>>>item adicionado com sucesso!')
             else:
                 print('\n\t>>>item não adicionado.')
             input('\n>precione enter para continuar...')
         else:
-            if lista.add_meio(item, pos):
+            if lista.adicionar_posicao(item, pos):
                 print('\n\t>>>item adicionado com sucesso!')
             else:
                 print('\n\t>>>item não adicionado.')
@@ -124,7 +125,7 @@ def imprimir_lista(lista):
 
     print('>sua lista:\n')
     
-    aux = lista._cabeca
+    aux = lista.get_primeiro()
     count = 1
     while aux:
         print(f'    {count}° - {aux.get_dado()}')

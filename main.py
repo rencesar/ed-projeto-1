@@ -1,11 +1,11 @@
 from fila import Fila
-from lista_encadeada import ListaEncadeada
+from listaDeCompras import ListaCompras
 from carrinho import Carrinho
 from listaDeCompras import add_item, remover_item, imprimir_lista
 import os
 
 opcao = 0
-lista = ListaEncadeada()
+lista = ListaCompras()
 carrinho = Carrinho()
 
 while opcao != 4:

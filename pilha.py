@@ -9,9 +9,7 @@ class Pilha:
     
     # PILHA VAZIA
     def vazia(self):
-        if self._topo is None:
-            return True
-        return False
+        return self._topo is None
     
     # INSERINDO NA PILHA
     def add(self, item):
