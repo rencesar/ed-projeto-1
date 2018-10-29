@@ -2,8 +2,8 @@ from pilha import Pilha
 
 
 class Carrinho:
-    def __init__(self, items):
-        self.items = Pilha()
+    def __init__(self, items=None):
+        self.items = Pilha(items)
     
     def colocar_item(self, item):
         self.items.add(item)

@@ -1,6 +1,36 @@
 import os
 from library import No, Pilha, Fila, ListaEnc
 
+
+class ListaCompras:
+
+    def __init__(self, items=None):
+        self.items = ListaEncadeada(items)
+    
+    def ordenar_valor(self):
+        raise NotImplementedError
+    
+    def listar_itens(self):
+        raise NotImplementedError
+    
+    def adicionar_inicio(self, item):
+        self.items.add_inicio(item)
+    
+    def adicionar_posicao(self, item, pos):
+        self.items.add_meio(item, pos)
+    
+    def adicionar_fim(self, item):
+        self.items.add_fim(item)
+    
+    def remover_inicio(self):
+        return self.items.remover_inicio()
+    
+    def remover_meio(self):
+        return self.items.remover_meio()
+    
+    def remover_fim(self):
+        return self.items.remover_fim()
+
 def add_item(lista, item):
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t#########################################')
