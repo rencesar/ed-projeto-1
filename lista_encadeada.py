@@ -70,7 +70,7 @@ class ListaEncadeada:
             p = p.get_proximo()
         p.set_proximo(None)
         self.countn()
-        return aux and True
+        return True
     
     # ACRESCENTA A CADA NOVO ITEM
     def count(self):
@@ -83,6 +83,10 @@ class ListaEncadeada:
     # TOTAL DE ITENS NA LISTA
     def get_total(self):
         return self.total-1
+
+    #RETORNA O PRIMEIRO ELEMENTO DA LISTA
+    def get_cabeca(self):
+        return self._cabeca
 
     # RETORNA O ULTIMO ELEMENTO DA LISTA
     def get_cauda(self):

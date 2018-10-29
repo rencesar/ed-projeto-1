@@ -1,18 +1,19 @@
-from fila import Fila
+from no import No
 from lista_encadeada import ListaEncadeada
-from carrinho import Carrinho
-from listaDeCompras import add_item, remover_item, imprimir_lista
+from pilha import Pilha
+from fila import Fila
+from listaDeCompras import ListaCompras, menu_add_item, menu_remover_item, imprimir_lista
 import os
 
 opcao = 0
-lista = ListaEncadeada()
-carrinho = Carrinho()
+lista = ListaCompras()
+carrinho = Pilha()
 
 while opcao != 4:
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t########################################')
     print('\t#                                      #')
-    print('\t#    1º: Fazendo a lista de compras    #')
+    print ('\t#    1º: Fazendo a lista de compras    #')
     print('\t#                                      #')
     print('\t########################################\n')
 
@@ -26,29 +27,24 @@ while opcao != 4:
     opcao = int(input('\n>sua opção: '))
 
     if opcao < 1 or opcao > 4:
-        print('\n    >>opção inválida!!')
+        print('\n    >>pção inválida!!')
         opcao = int(input('    >>selecione uma opção novamente: '))
+
     elif opcao == 1:
-        item = input('\n    >>insira seu item na lista: ')
-        add_item(lista, item)
+        menu_add_item(lista)
+
     elif opcao == 2:
-        if lista.vazia():
-            print('\n    >>não pode mais remover, lista vazia.')
-            input('\n>precione enter para continuar...')
-        else:
-            remover_item(lista)
+        menu_remover_item(lista)
+
     elif opcao == 3:
-        if lista.vazia():
-            print('\n    >>lista ainda vazia, adicione itens.')
-            input('\n>precione enter para continuar...')
-        else:
-            imprimir_lista(lista)
-            input('\n>precione enter para continuar...')
+        imprimir_lista(lista)
+        input('\n>precione enter para continuar...')
+
     elif opcao == 4:
         if lista.vazia():
             print('\n    >>lista vazia, tente adicionar itens para finalizar.')
             item = input('\n\t>>>insira seu item no carrinho: ')
-            add_item(lista, item)
+            menu_add_item(lista)
             opcao = 1
         else:
-            print('\n    >>lista finalizada, se direcione ao caixa!')
+            print('\n    >>lista finalizada, se direcione ao supermercado!')
