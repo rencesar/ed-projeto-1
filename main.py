@@ -1,18 +1,18 @@
 from fila import Fila
 from lista_encadeada import ListaEncadeada
-from pilha import Pilha
+from carrinho import Carrinho
 from listaDeCompras import add_item, remover_item, imprimir_lista
 import os
 
 opcao = 0
 lista = ListaEncadeada()
-carrinho = Pilha()
+carrinho = Carrinho()
 
 while opcao != 4:
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t########################################')
     print('\t#                                      #')
-    print ('\t#    1º: Fazendo a lista de compras    #')
+    print('\t#    1º: Fazendo a lista de compras    #')
     print('\t#                                      #')
     print('\t########################################\n')
 

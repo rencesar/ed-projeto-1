@@ -1,3 +1,6 @@
+from no import No
+
+
 class Fila:
     # INICANDO A FILA
     def __init__(self, itens=[]):
