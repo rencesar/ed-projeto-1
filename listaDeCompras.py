@@ -1,11 +1,13 @@
 import os
-from library import No, Pilha, Fila, ListaEnc
+from fila import Fila
+from lista_encadeada import ListaEncadeada
+from pilha import Pilha
 
 def add_item(lista, item):
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t#########################################')
     print('\t#                                       #')
-    print('\t#   Adicionando produtos no carrinho    #')
+    print('\t#    Adicionando produtos na lista      #')
     print('\t#                                       #')
     print('\t#########################################\n')
 
@@ -15,6 +17,7 @@ def add_item(lista, item):
         else:
             print(f'\t>{item} não adicionado.')
         input('\n>precione enter para continuar...')
+
     elif lista.get_total() == 1:
         if lista.add_fim(item):
             print(f'\t>{item} adicionado com sucesso!')
@@ -23,7 +26,7 @@ def add_item(lista, item):
         input('\n>precione enter para continuar...')
     else:
         print('>sua lista:\n')
-        lista.imprimir()
+        imprimir_lista(lista)
         pos = int(input('\n   >>selecione a posição do item na lista: '))
         pos -= 1
         if pos == 0:
@@ -54,7 +57,7 @@ def remover_item(lista):
     print('\t########################################\n')
 
     print('>sua lista:\n')
-    lista.imprimir()
+    imprimir_lista(lista)
 
     lixo = int(input('\n    >>selecione o item a ser removido: '))
 
@@ -85,10 +88,15 @@ def imprimir_lista(lista):
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t########################################')
     print('\t#                                      #')
-    print ('\t#   Exibindo a sua lista de compras    #')
+    print('\t#   Exibindo a sua lista de compras    #')
     print('\t#                                      #')
     print('\t########################################\n')
 
     print('>sua lista:\n')
-    lista.imprimir()
-    input('\n>precione enter para continuar...')
+    
+    aux = lista._cabeca
+    count = 1
+    while aux:
+        print(f'    {count}° - {aux.get_dado()}')
+        aux = aux.get_proximo()
+        count += 1

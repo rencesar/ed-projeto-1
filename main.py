@@ -5,7 +5,7 @@ from listaDeCompras import add_item, remover_item, imprimir_lista
 import os
 
 opcao = 0
-lista = ListaEnc()
+lista = ListaEncadeada()
 carrinho = Pilha()
 
 while opcao != 4:
@@ -26,24 +26,25 @@ while opcao != 4:
     opcao = int(input('\n>sua opção: '))
 
     if opcao < 1 or opcao > 4:
-        print('\n    >>pção inválida!!')
+        print('\n    >>opção inválida!!')
         opcao = int(input('    >>selecione uma opção novamente: '))
-    if opcao == 1:
+    elif opcao == 1:
         item = input('\n    >>insira seu item na lista: ')
         add_item(lista, item)
-    if opcao == 2:
+    elif opcao == 2:
         if lista.vazia():
             print('\n    >>não pode mais remover, lista vazia.')
             input('\n>precione enter para continuar...')
         else:
             remover_item(lista)
-    if opcao == 3:
+    elif opcao == 3:
         if lista.vazia():
             print('\n    >>lista ainda vazia, adicione itens.')
             input('\n>precione enter para continuar...')
         else:
             imprimir_lista(lista)
-    if opcao == 4:
+            input('\n>precione enter para continuar...')
+    elif opcao == 4:
         if lista.vazia():
             print('\n    >>lista vazia, tente adicionar itens para finalizar.')
             item = input('\n\t>>>insira seu item no carrinho: ')
@@ -51,5 +52,3 @@ while opcao != 4:
             opcao = 1
         else:
             print('\n    >>lista finalizada, se direcione ao caixa!')
-        # inverter o vetor
-        # colocar os itens na pilha;
