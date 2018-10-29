@@ -4,22 +4,34 @@ from no import No
 class Fila:
     # INICANDO A FILA
     def __init__(self, itens=[]):
-        self._itens = itens
+        self._cabeca = None
+        for item in itens:
+            self.add(item)
 
     # FILA VAZIA
     def vazia(self):
-        if self._itens == []:
-            return True
-        return False
+        return self.tamanho() != 0
 
     # INSERINDO NA FILA
     def add(self, item):
-        self._itens.insert(0, item)
+        item = No(item)
+        if self._cabeca is not None:
+            self._cabeca.set_proximo(item)
+        self._cabeca = item
 
     # REMOVENDO DA FILA
     def remover(self):
-        return self._itens.pop()
+        aux = self._cabeca
+        if aux is None:
+            raise ValueError("Fila vazia")
+        self._cabeca = self._cabeca.get_proximo()
+        return aux
 
     # RETORNANDO O TAMANHO DA FILA
     def tamanho(self):
-        return len(self._itens)
+        aux = self._cabeca
+        count = 0
+        while aux is not None:
+            aux = aux.get_proximo()
+            count += 1
+        return count
