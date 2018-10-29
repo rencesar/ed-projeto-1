@@ -7,7 +7,7 @@ import os
 
 opcao = 0
 lista = ListaCompras()
-carrinho = Pilha()
+carrinho = Carrinho()
 
 while opcao != 4:
     os.system('cls' if os.name == 'nt' else 'clear')

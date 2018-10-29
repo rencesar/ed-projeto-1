@@ -10,6 +10,9 @@ class Carrinho:
     
     def remover_item(self):
         return self.items.remover()
+    
+    def vazio(self):
+        return self.items.vazia()
 
     # def add_carrinho(self, lista):
     #     while lista.vazia():
