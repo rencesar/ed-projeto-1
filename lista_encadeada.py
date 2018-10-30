@@ -69,6 +69,7 @@ class ListaEncadeada:
         while p.get_proximo() is not self._cauda:
             p = p.get_proximo()
         p.set_proximo(None)
+        self._cauda = p
         self.countn()
         return True
     

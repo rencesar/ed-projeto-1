@@ -24,13 +24,13 @@ class ListaCompras:
     def adicionar_fim(self, item):
         return self.items.add_fim(item)
     
-    def remover_inicio(self):
+    def rem_inicio(self):
         return self.items.remover_inicio()
     
-    def remover_meio(self, pos):
+    def rem_meio(self, pos):
         return self.items.remover_meio(pos)
     
-    def remover_fim(self):
+    def rem_fim(self):
         return self.items.remover_fim()
     
     def vazia(self):
@@ -38,6 +38,9 @@ class ListaCompras:
     
     def get_primeiro(self):
         return self.items.get_cabeca()
+
+    def get_ultimo(self):
+        return self.items.get_cauda()
 
     def total_items(self):
         return self.items.get_total()
@@ -57,95 +60,90 @@ def menu_add_item(lista):
             print(f'\n\t»»{item} adicionado com sucesso!')
         else:
             print(f'\n\t»»{item} não adicionado.')
-        input('\n\n\n»precione enter para continuar...')
-
-    # elif lista.total_items() == 1:
-    #     if lista.adicionar_fim(item):
-    #         print(f'\n\t>{item} adicionado com sucesso!')
-    #     else:
-    #         print('\n\t>item não adicionado.')
-    #     input('\n>precione enter para continuar...')
+        lixo = input('\n\n\n»precione enter para continuar...')
     
     else:
         print('\n»sua lista:\n')
+        
         imprimir_lista(lista)
+        
         pos = int(input('\n\t»»selecione a posição do item na lista: '))
         pos -= 1
-        if pos == 0:
+        
+        if pos <= 0:
             if lista.adicionar_inicio(item):
                 print('\n\t\t»»»item adicionado com sucesso!')
             else:
                 print('\n\t\t»»»item não adicionado.')
-            input('\n\n\n»precione enter para continuar...')
-        elif pos > lista.total_items():
+            lixo = input('\n\n\n»precione enter para continuar...')
+        
+        elif pos >= lista.total_items():
             if lista.adicionar_fim(item):
                 print('\n\t\t»»»item adicionado com sucesso!')
             else:
                 print('\n\t\t»»»item não adicionado.')
-            input('\n\n\n»precione enter para continuar...')
+            lixo = input('\n\n\n»precione enter para continuar...')
+        
         else:
             if lista.adicionar_posicao(item, pos):
                 print('\n\t\t»»»item adicionado com sucesso!')
             else:
                 print('\n\t\t»»»item não adicionado.')
-            input('\n\n\n»precione enter para continuar...')
+            lixo = input('\n\n\n»precione enter para continuar...')
 
 def menu_remover_item(lista):
     if lista.vazia():
         print('\n\t»»não pode mais remover, lista vazia.')
-        input('\n\n\n»precione enter para continuar...')
+        lixo = input('\n\n\n»precione enter para continuar...')
+    
     else:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print('\t╔═════════════════════════════╗')
-        # print('\t║                             ║')
-        print('\t║ Removendo itens do carrinho ║')
-        # print('\t║                             ║')
-        print('\t╚═════════════════════════════╝')
+        print('\t╔══════════════════════════╗')
+        print('\t║ Removendo itens da lista ║')
+        print('\t╚══════════════════════════╝')
 
         print('»sua lista:\n')
+
         imprimir_lista(lista)
 
         pos = int(input('\n\t»»selecione o item a ser removido: '))
 
-        if pos < 1 or pos > lista.total_items():
-            print('\n\t\t»»»posição não disponível para remoção.')
-            input('\n\n\n»precione enter para continuar...')
-        elif pos == 1:
+        if pos <= 1:
             if lista.remover_inicio():
                 print('\n\t\t»»»item removido com sucesso!')
             else:
                 print('\n\t\t»»»item não removido.')
-            input('\n\n\n»precione enter para continuar...')
-        elif pos == lista.total_items():
+            lixo = input('\n\n\n»precione enter para continuar...')
+    
+        elif pos >= lista.total_items():
             if lista.remover_fim():
                 print('\n\t\t»»»item removido com sucesso!')
             else:
                 print('\n\t\t»»»item não removido.')
-            input('\n\n\n»precione enter para continuar...')
+            lixo = input('\n\n\n»precione enter para continuar...')
+    
         else:
             pos -= 1
             if lista.remover_meio(pos):
                 print('\n\t\t»»»item removido com sucesso!')
             else:
                 print('\n\t\t»»»item não removido.')
-            input('\n>precione enter para continuar...')
+            lixo = input('\n»precione enter para continuar...')
 
 def imprimir_lista(lista):
     if lista.vazia():
         print('\n\t»»lista ainda vazia, adicione itens.')
     else:
         os.system('cls' if os.name == 'nt' else 'clear')
-        print('\t╔════════════════════════════╗')
-        # print('\t║                            ║')
-        print('\t║ Exibindo itens do carrinho ║')
-        # print('\t║                            ║')
-        print('\t╚════════════════════════════╝')
+        print('\t╔═════════════════════════╗')
+        print('\t║ Exibindo itens da lista ║')
+        print('\t╚═════════════════════════╝')
 
         print('\n»sua lista:\n')
         
         aux = lista.get_primeiro()
         count = 1
-        while aux:
-            print(f'    Posição {count}: {aux.get_dado()}')
+        while aux is not None:
+            print(f'    Posição {count}: {aux}')
             aux = aux.get_proximo()
             count += 1
