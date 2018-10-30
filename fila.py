@@ -3,21 +3,23 @@ from no import No
 
 class Fila:
     # INICANDO A FILA
-    def __init__(self, itens=[]):
-        self._cabeca = None
-        for item in itens:
-            self.add(item)
+    def __init__(self, cabeca=None):
+        self._cabeca = cabeca
 
     # FILA VAZIA
     def vazia(self):
-        return self.tamanho() != 0
+        return self._cabeca is None
 
     # INSERINDO NA FILA
     def add(self, item):
         item = No(item)
-        if self._cabeca is not None:
-            self._cabeca.set_proximo(item)
-        self._cabeca = item
+        if self._cabeca is None:
+            self._cabeca = item
+        else:
+            aux = self._cabeca
+            while self._cabeca is not None:
+                aux = aux.get_proximo()
+            aux.set_proximo(item)
 
     # REMOVENDO DA FILA
     def remover(self):
