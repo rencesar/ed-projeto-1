@@ -1,6 +1,8 @@
 import os
 from pilha import Pilha
-from listaDeCompras import ListaCompras, imprimir_lista
+from list_de_compras import imprimir_lista
+
+from utils import clean_screen
 
 class Carrinho:
     def __init__(self, items=None):
@@ -54,49 +56,50 @@ def remover_item_carrinho(pilha):
 
     if pilha.vazio():
         print('\n\t»»lista ainda vazia, adicione itens.')
+        return
+    
+    imprimir_carrinho(pilha)
+    
+    print('\n\t╔═════════════════════════════════╗')
+    print('\t║ »deseja remover o item do topo? ║')
+    print('\t╠═════════════════════════════════╣')
+    print('\t║ Opção 1 »» remover item         ║')
+    print('\t║ Opção 2 »» voltar               ║')
+    print('\t╚═════════════════════════════════╝')
+
+    opcao = int(input('\n»sua opção: '))
+
+    if opcao == 1:
+        pilha.remover_item()
+        print('\n\t»»item removido!')
+        input('\n\n\n»precione enter para continuar...')
+
+    elif opcao == 2:
+        print('\n\t»»item não removido!')
+        input('\n\n\n»precione enter para continuar...')
+    
     else:
-        imprimir_pilha(pilha)
-        
-        print('\n\t╔═════════════════════════════════╗')
-        print('\t║ »deseja remover o item do topo? ║')
-        print('\t╠═════════════════════════════════╣')
-        print('\t║ Opção 1 »» remover item         ║')
-        print('\t║ Opção 2 »» voltar               ║')
-        print('\t╚═════════════════════════════════╝')
+        print('\n\t»»opção inválida!')
+        opcao = int(input('\n»tente uma nova opção: '))
 
-        opcao = int(input('\n»sua opção: '))
-
-        if opcao == 1:
-            pilha.remover_item()
-            print('\n\t»»item removido!')
-            lixo = input('\n\n\n»precione enter para continuar...')
-
-        elif opcao == 2:
-            print('\n\t»»item não removido!')
-            lixo = input('\n\n\n»precione enter para continuar...')
-        
-        else:
-            print('\n\t»»opção inválida!')
-            opcao = int(input('\n»tente uma nova opção: '))
-
-def imprimir_pilha(pilha):
-    if pilha.vazio():
+def imprimir_carrinho(carrinho):
+    if carrinho.vazio():
         print('\n\t»»carrinho ainda vazio, adicione itens.')
-    else:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print('\t╔═════════════════════════╗')
-        print('\t║ Exibindo itens da lista ║')
-        print('\t╚═════════════════════════╝')
+        return
 
-        print('\n»seu carrinho:\n')
+    print('\t╔════════════════════════════╗')
+    print('\t║ Exibindo itens do carrinho ║')
+    print('\t╚════════════════════════════╝')
 
-        aux = pilha.get_primeiro()
-        print('╔═════════╗')
-        print('║ »topo ↓ ║')
-        print('╠═════════╝')
-        while aux is not None:
-            print(f'║   → {aux}')
-            aux = aux.get_proximo()
-        print('╠═════════╗')
-        print('║ »fim  ↑ ║')
-        print('╚═════════╝')
+    print('\n»seu carrinho:\n')
+
+    aux = carrinho.get_primeiro()
+    print('╔═════════╗')
+    print('║ »topo ↓ ║')
+    print('╠═════════╝')
+    while aux is not None:
+        print(f'║   → {aux}')
+        aux = aux.get_proximo()
+    print('╠═════════╗')
+    print('║ »fim  ↑ ║')
+    print('╚═════════╝')

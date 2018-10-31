@@ -1,10 +1,15 @@
 from fila import Fila
 
+from utils import clean_screen
+
 
 class Caixa:
     def __init__(self, items=None):
         self.items = Fila(items)
         self.valor_total = 0
+    
+    def get_primeiro(self):
+        self.items.get_primeiro()
 
     def adicionar_item(self, item):
         self.items.add(item)
@@ -12,7 +17,7 @@ class Caixa:
     def validar_item(self, item):
         return self.items.remover()
     
-    def caixa_vazio(self):
+    def vazio(self):
         return self.items.vazia()
 
 def menu_caixa(carrinho):
@@ -20,5 +25,26 @@ def menu_caixa(carrinho):
         item = carrinho.remover_item()
         caixa.adicionar_item()
 
-def imprimir_fila(fila):
-    pass
+
+def imprimir_caixa(caixa):
+    if caixa.vazio():
+        print('\n\t»»caixa ainda vazio, adicione itens.')
+        return
+
+    clean_screen()
+    print('\t╔═════════════════════════╗')
+    print('\t║ Exibindo itens do caixa ║')
+    print('\t╚═════════════════════════╝')
+
+    print('\n»seu caixa:\n')
+
+    aux = caixa.get_primeiro()
+    print('╔═════════╗')
+    print('║ »topo ↓ ║')
+    print('╠═════════╝')
+    while aux is not None:
+        print(f'║   → {aux}')
+        aux = aux.get_proximo()
+    print('╠═════════╗')
+    print('║ »fim  ↑ ║')
+    print('╚═════════╝')

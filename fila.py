@@ -5,6 +5,10 @@ class Fila:
     # INICANDO A FILA
     def __init__(self, cabeca=None):
         self._cabeca = cabeca
+    
+    # PEGAR PRIMEIRO ELEMENTO
+    def get_primeiro(self):
+        return self._cabeca
 
     # FILA VAZIA
     def vazia(self):
@@ -17,15 +21,17 @@ class Fila:
             self._cabeca = aux
         else:
             aux = self._cabeca
-            while self._cabeca is not None:
+            while True:
+                if aux.get_proximo() is None:
+                    break
                 aux = aux.get_proximo()
             aux.set_proximo(item)
 
     # REMOVENDO DA FILA
     def remover(self):
-        aux = self._cabeca
         if aux is None:
             raise ValueError("Fila vazia")
+        aux = self._cabeca
         self._cabeca = self._cabeca.get_proximo()
         return aux
 

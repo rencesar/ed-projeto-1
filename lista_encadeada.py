@@ -19,12 +19,10 @@ class ListaEncadeada:
             self._cabeca = self._cauda = aux
             self.count()
             return True
-        else:
-            aux.set_proximo(self._cabeca)
-            self._cabeca = aux
-            self.count()
-            return True
-        return False
+        aux.set_proximo(self._cabeca)
+        self._cabeca = aux
+        self.count()
+        return True
     
     # ADICIONA UM ELEMENTO NO MEIO DA LISTA
     def add_meio(self, item, pos):
@@ -32,8 +30,7 @@ class ListaEncadeada:
         p = q = self._cabeca
         for i in range(pos-1):
             p = p.get_proximo()
-        for i in range(pos):
-            q = q.get_proximo()
+            q = p.get_proximo()
         aux.set_proximo(q)
         p.set_proximo(aux)
         self.count()
@@ -49,30 +46,32 @@ class ListaEncadeada:
     
     # REMOVE O ELEMENTO DO INICIO
     def remover_inicio(self):
+        aux = self._cabeca
         self._cabeca = self._cabeca.get_proximo()
         self.countn()
-        return True
+        return aux
     
     # REMOVE UM ELEMTO DA LISTA
     def remover_meio(self, pos):
         p = q = self._cabeca
         for i in range(pos-1):
             p = p.get_proximo()
-        for i in range(pos):
             q = q.get_proximo()
+        aux = q
         p.set_proximo(q.get_proximo())
         self.countn()
-        return True
+        return aux
     
     # REMOVE O ELEMENTO DO FINAL
     def remover_fim(self):
         p = self._cabeca
+        aux = self._cauda
         while p.get_proximo() is not self._cauda:
             p = p.get_proximo()
         p.set_proximo(None)
         self._cauda = p
         self.countn()
-        return True
+        return aux
     
     # ACRESCENTA A CADA NOVO ITEM
     def count(self):

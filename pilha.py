@@ -25,8 +25,9 @@ class Pilha:
     def remover(self):
         if self._topo is None:
             raise IndexError("Nao contem elemento.")
+        aux = self._topo
         self._topo = self._topo.get_proximo()
-        return True
+        return aux
     
     # RETORNANDO O TAMANHO DA PILHA
     def tamanho(self):

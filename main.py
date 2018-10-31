@@ -1,11 +1,9 @@
-from no import No
-from lista_encadeada import ListaEncadeada
-from pilha import Pilha
-from fila import Fila
-from listaDeCompras import ListaCompras, menu_add_item, menu_remover_item, imprimir_lista
-from carrinho import Carrinho, add_carrinho, remover_item_carrinho, imprimir_pilha
-from caixa import Caixa
-import os
+from list_de_compras import ListaCompras, menu_add_item, menu_remover_item, imprimir_lista
+from carrinho import Carrinho, add_carrinho, remover_item_carrinho, imprimir_carrinho
+from caixa import Caixa, imprimir_caixa
+
+from utils import clean_screen
+
 
 opcao = 0
 lista = ListaCompras()
@@ -14,7 +12,7 @@ caixa = Caixa()
 
 # menu lista
 while opcao != 4:
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clean_screen()
     print('\t╔════════════════════════════════╗')
     print('\t║ 1º: Fazendo a lista de compras ║')
     print('\t╠════════════════════════════════╣')
@@ -25,6 +23,7 @@ while opcao != 4:
     print('\t╚════════════════════════════════╝')
 
     opcao = int(input('\n»sua opção: '))
+    clean_screen()
 
     if opcao < 1 or opcao > 4:
         print('\n\t»opção inválida!!')
@@ -38,7 +37,7 @@ while opcao != 4:
 
     elif opcao == 3:
         imprimir_lista(lista)
-        lixo = input('\n\n\n»precione enter para continuar...')
+        input('\n\n\n»precione enter para continuar...')
 
     elif opcao == 4:
         if lista.vazia():
@@ -51,7 +50,7 @@ while opcao != 4:
 
 # menu pilha
 while not lista.vazia():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clean_screen()
     print('\t╔═════════════════════════════════════╗')
     print('\t║ 2º: Colocando itens no carrinho     ║')
     print('\t╠═════════════════════════════════════╣')
@@ -61,6 +60,7 @@ while not lista.vazia():
     print('\t╚═════════════════════════════════════╝')
     
     opcao = int(input('\n»sua opção: '))
+    clean_screen()
 
     if opcao < 1 or opcao > 3:
         print('\n\t»opção inválida!!')
@@ -73,18 +73,52 @@ while not lista.vazia():
         remover_item_carrinho(carrinho)
 
     elif opcao == 3:
-        imprimir_pilha(carrinho)
-        lixo = input('\n\n\n»precione enter para continuar...')
+        imprimir_carrinho(carrinho)
+        input('\n\n\n»precione enter para continuar...')
 
-aux = No()
-while not carrinho.vazio():
-    caixa.adicionar_item(carrinho.remover_item())
 
 # menu fila
-while not caixa.caixa_vazio():
-    os.system('cls' if os.name == 'nt' else 'clear')
+while not carrinho.vazio() or not caixa.vazio():
+    clean_screen()
     print('\t╔════════════════════════════════════════════╗')
     print('\t║ 3º: Passando no caixa os itens do carrinho ║')
     print('\t╚════════════════════════════════════════════╝')
+    print('\t║ Opção 1 »» botar item                      ║')
+    print('\t║ Opção 2 »» passar/comprar item             ║')
+    print('\t║ Opção 3 »» exibir itens no caixa           ║')
+    print('\t╚════════════════════════════════════════════╝')
+    imprimir_carrinho(carrinho)
+    opcao = int(input('\n»sua opção: '))
 
-    input('VAI TOMAR NO CU ')
+    clean_screen()
+    if opcao < 1 or opcao > 3:
+        print('\n\t»opção inválida!!')
+        opcao = int(input('\t»selecione uma opção novamente: '))
+
+    elif opcao == 1:
+        if carrinho.vazio():
+            print('\n\t»opção inválida!!')
+            print('\t»Carrinho Vazio')
+        else:
+            aux = carrinho.remover_item()
+            caixa.adicionar_item(aux)
+            print('\n\t»»item {aux} foi colocado no caixa!'.format(aux=aux))
+            input('\n\n\n»precione enter para continuar...')
+
+    elif opcao == 2:
+        if caixa.vazio():
+            print('\n\t»opção inválida!!')
+            print('\t»Caixa Vazio')
+        else:
+            aux = caixa.remover()
+            print('\n\t»»item {aux} foi colocado no caixa!'.format(aux=aux))
+            input('\n\n\n»precione enter para continuar...')
+
+    elif opcao == 3:
+        imprimir_caixa(carrinho)
+    
+    input('\n\n\n»precione enter para continuar...')
+
+clean_screen()
+
+print("Volte Sempre!")
