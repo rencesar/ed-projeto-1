@@ -78,9 +78,7 @@ while not lista.vazia():
 
 aux = No()
 while not carrinho.vazio():
-    aux = carrinho.get_primeiro()
-    caixa.adicionar_item(aux)
-    carrinho.remover_item()
+    caixa.adicionar_item(carrinho.remover_item())
 
 # menu fila
 while not caixa.caixa_vazio():
