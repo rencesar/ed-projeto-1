@@ -1,4 +1,4 @@
-from fila import Fila
+from library.fila import Fila
 
 from utils import clean_screen
 

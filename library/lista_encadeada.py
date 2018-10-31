@@ -28,7 +28,7 @@ class ListaEncadeada:
     def add_meio(self, item, pos):
         aux = No(item)
         p = q = self._cabeca
-        for i in range(pos-1):
+        for i in range(pos):
             p = p.get_proximo()
             q = p.get_proximo()
         aux.set_proximo(q)
@@ -54,7 +54,7 @@ class ListaEncadeada:
     # REMOVE UM ELEMTO DA LISTA
     def remover_meio(self, pos):
         p = q = self._cabeca
-        for i in range(pos-1):
+        for i in range(pos):
             p = p.get_proximo()
             q = q.get_proximo()
         aux = q

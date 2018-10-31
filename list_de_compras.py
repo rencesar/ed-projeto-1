@@ -1,4 +1,4 @@
-from lista_encadeada import ListaEncadeada
+from library.lista_encadeada import ListaEncadeada
 
 from utils import clean_screen
 
