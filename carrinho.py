@@ -50,6 +50,35 @@ def add_carrinho(lista, pilha):
         pilha.colocar_item(aux)
         lista.rem_meio(pos)
 
+def remover_item_carrinho(pilha):
+
+    if pilha.vazio():
+        print('\n\t»»lista ainda vazia, adicione itens.')
+    else:
+        imprimir_pilha(pilha)
+        
+        print('\n\t╔═════════════════════════════════╗')
+        print('\t║ »deseja remover o item do topo? ║')
+        print('\t╠═════════════════════════════════╣')
+        print('\t║ Opção 1 »» remover item         ║')
+        print('\t║ Opção 2 »» voltar               ║')
+        print('\t╚═════════════════════════════════╝')
+
+        opcao = int(input('\n»sua opção: '))
+
+        if opcao == 1:
+            pilha.remover_item()
+            print('\n\t»»item removido!')
+            lixo = input('\n\n\n»precione enter para continuar...')
+
+        elif opcao == 2:
+            print('\n\t»»item não removido!')
+            lixo = input('\n\n\n»precione enter para continuar...')
+        
+        else:
+            print('\n\t»»opção inválida!')
+            opcao = int(input('\n»tente uma nova opção: '))
+
 def imprimir_pilha(pilha):
     if pilha.vazio():
         print('\n\t»»carrinho ainda vazio, adicione itens.')
@@ -62,7 +91,12 @@ def imprimir_pilha(pilha):
         print('\n»seu carrinho:\n')
 
         aux = pilha.get_primeiro()
-        print('»topo ↓')
+        print('╔═════════╗')
+        print('║ »topo ↓ ║')
+        print('╠═════════╝')
         while aux is not None:
-            print(f'\t{aux}')
+            print(f'║   → {aux}')
             aux = aux.get_proximo()
+        print('╠═════════╗')
+        print('║ »fim  ↑ ║')
+        print('╚═════════╝')

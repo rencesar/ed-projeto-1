@@ -48,9 +48,7 @@ class ListaCompras:
 def menu_add_item(lista):
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t╔════════════════════════════╗')
-    # print('\t║                            ║')
     print('\t║ Adicionando itens na lista ║')
-    # print('\t║                            ║')
     print('\t╚════════════════════════════╝')
 
     item = input('\n»insira o nome do item na lista: ')
@@ -107,24 +105,24 @@ def menu_remover_item(lista):
         imprimir_lista(lista)
 
         pos = int(input('\n\t»»selecione o item a ser removido: '))
+        pos -= 1
 
         if pos <= 1:
-            if lista.remover_inicio():
+            if lista.rem_inicio():
                 print('\n\t\t»»»item removido com sucesso!')
             else:
                 print('\n\t\t»»»item não removido.')
             lixo = input('\n\n\n»precione enter para continuar...')
     
         elif pos >= lista.total_items():
-            if lista.remover_fim():
+            if lista.rem_fim():
                 print('\n\t\t»»»item removido com sucesso!')
             else:
                 print('\n\t\t»»»item não removido.')
             lixo = input('\n\n\n»precione enter para continuar...')
     
         else:
-            pos -= 1
-            if lista.remover_meio(pos):
+            if lista.rem_meio(pos):
                 print('\n\t\t»»»item removido com sucesso!')
             else:
                 print('\n\t\t»»»item não removido.')
@@ -141,9 +139,11 @@ def imprimir_lista(lista):
 
         print('\n»sua lista:\n')
         
-        aux = lista.get_primeiro()
+        p = lista.get_primeiro()
         count = 1
-        while aux is not None:
-            print(f'    Posição {count}: {aux}')
-            aux = aux.get_proximo()
+        print('╔═════════════╗')
+        while p is not None:
+            print(f'║ »{count}° posição ║ → {p}')
+            print('╠═════════════╣')
+            p = p.get_proximo()
             count += 1

@@ -12,9 +12,9 @@ class Fila:
 
     # INSERINDO NA FILA
     def add(self, item):
-        item = No(item)
+        aux = No(item)
         if self._cabeca is None:
-            self._cabeca = item
+            self._cabeca = aux
         else:
             aux = self._cabeca
             while self._cabeca is not None:

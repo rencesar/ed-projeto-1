@@ -3,22 +3,25 @@ from lista_encadeada import ListaEncadeada
 from pilha import Pilha
 from fila import Fila
 from listaDeCompras import ListaCompras, menu_add_item, menu_remover_item, imprimir_lista
-from carrinho import Carrinho, add_carrinho, imprimir_pilha
+from carrinho import Carrinho, add_carrinho, remover_item_carrinho, imprimir_pilha
+from caixa import Caixa
 import os
 
 opcao = 0
 lista = ListaCompras()
 carrinho = Carrinho()
+caixa = Caixa()
 
+# menu lista
 while opcao != 4:
     os.system('cls' if os.name == 'nt' else 'clear')
     print('\t╔════════════════════════════════╗')
     print('\t║ 1º: Fazendo a lista de compras ║')
     print('\t╠════════════════════════════════╣')
-    print('\t║ Opção 1: Adionar item          ║')
-    print('\t║ Opção 2: Remover item          ║')
-    print('\t║ Opção 3: Ver a lista           ║')
-    print('\t║ Opção 4: Ir para o mercado     ║')
+    print('\t║ Opção 1 »» adionar item        ║')
+    print('\t║ Opção 2 »» remover item        ║')
+    print('\t║ Opção 3 »» ver a lista         ║')
+    print('\t║ Opção 4 »» ir para o mercado   ║')
     print('\t╚════════════════════════════════╝')
 
     opcao = int(input('\n»sua opção: '))
@@ -46,19 +49,20 @@ while opcao != 4:
         else:
             print('\n\t»»lista finalizada, se direcione ao supermercado!')
 
-while lista.vazia() is not True:
+# menu pilha
+while not lista.vazia():
     os.system('cls' if os.name == 'nt' else 'clear')
-    print('\t╔═══════════════════════════════════╗')
-    print('\t║ 2º: Colocando itens no carrinho   ║')
-    print('\t╠═══════════════════════════════════╣')
-    print('\t║ Opção 1: Adionar item             ║')
-    print('\t║ Opção 2: Deixar item no carrinho  ║')
-    print('\t║ Opção 3: Exibir itens no carrinho ║')
-    print('\t╚═══════════════════════════════════╝')
+    print('\t╔═════════════════════════════════════╗')
+    print('\t║ 2º: Colocando itens no carrinho     ║')
+    print('\t╠═════════════════════════════════════╣')
+    print('\t║ Opção 1 »» adionar item             ║')
+    print('\t║ Opção 2 »» remover item             ║')
+    print('\t║ Opção 3 »» exibir itens do carrinho ║')
+    print('\t╚═════════════════════════════════════╝')
     
     opcao = int(input('\n»sua opção: '))
 
-    if opcao < 1 or opcao > 4:
+    if opcao < 1 or opcao > 3:
         print('\n\t»opção inválida!!')
         opcao = int(input('\t»selecione uma opção novamente: '))
 
@@ -66,10 +70,23 @@ while lista.vazia() is not True:
         add_carrinho(lista, carrinho)
 
     elif opcao == 2:
-        pass
+        remover_item_carrinho(carrinho)
 
     elif opcao == 3:
         imprimir_pilha(carrinho)
         lixo = input('\n\n\n»precione enter para continuar...')
 
-print('\t\nFILA DE COMPRAS AQUI !!')
+aux = No()
+while not carrinho.vazio():
+    aux = carrinho.get_primeiro()
+    caixa.adicionar_item(aux)
+    carrinho.remover_item()
+
+# menu fila
+while not caixa.caixa_vazio():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('\t╔════════════════════════════════════════════╗')
+    print('\t║ 3º: Passando no caixa os itens do carrinho ║')
+    print('\t╚════════════════════════════════════════════╝')
+
+    input('VAI TOMAR NO CU ')

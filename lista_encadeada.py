@@ -32,7 +32,8 @@ class ListaEncadeada:
         p = q = self._cabeca
         for i in range(pos-1):
             p = p.get_proximo()
-            q = p.get_proximo()
+        for i in range(pos):
+            q = q.get_proximo()
         aux.set_proximo(q)
         p.set_proximo(aux)
         self.count()
@@ -57,7 +58,8 @@ class ListaEncadeada:
         p = q = self._cabeca
         for i in range(pos-1):
             p = p.get_proximo()
-            q = p.get_proximo()
+        for i in range(pos):
+            q = q.get_proximo()
         p.set_proximo(q.get_proximo())
         self.countn()
         return True
@@ -65,7 +67,6 @@ class ListaEncadeada:
     # REMOVE O ELEMENTO DO FINAL
     def remover_fim(self):
         p = self._cabeca
-        aux = self._cauda
         while p.get_proximo() is not self._cauda:
             p = p.get_proximo()
         p.set_proximo(None)
